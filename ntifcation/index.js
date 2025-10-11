@@ -210,6 +210,7 @@ app.post('/seen', (req, res) => {
     let id = Number(req.body.id);
     db.query('UPDATE `notifiction` SET `status`=? WHERE id  = ?', [2, id], (err, result) => {
         if (!err) {
+            return res.status(200).json({ status: true, error: false, mes: "Sucessfull" })
 
 
         } else {
