@@ -174,15 +174,32 @@ app.post('/check-notifaction-all', (req, res) => {
 
 
                     } else {
+                        console.log("--------------------------");
+                        console.log(err);
+                        console.log("--------------------------");
+
                         return res.status(500).json({ status: true, error: true, mes: "Soemthing Went Wrong" })
 
                     }
                 })
 
             } else {
+                console.log("--------------------------");
+                console.log("--------------------------");
+
+                console.log(result);
+                console.log("--------------------------");
+
                 res.send({ status: true, error: true, mes: "Something went wrong", error: err })
             }
         } else {
+            console.log("--------------------------");
+            console.log("--------------------------");
+            console.log("--------------------------");
+
+            console.log(err);
+            console.log("--------------------------");
+
             return res.status(500).json({ status: true, error: true, mes: "Soemthing Went Wrong" })
 
         }
@@ -223,7 +240,7 @@ app.post('/data', urlencoded, [
     const sub = req.body.data
     webpush.setVapidDetails('mailto:mpratyush54@gmail.com', publicKey, privateKey);
 
-  
+
 
 
 
@@ -235,16 +252,16 @@ app.post('/data', urlencoded, [
     let time = dateFormat("hh-MM-ss")
     var userAgent = JSON.stringify(req.body.useragent)
     var enddata = JSON.stringify(req.body.data)
-    // console.log(req.body.data);
-    
+        // console.log(req.body.data);
+
 
 
 
 
     db.query('SELECT * FROM `notification_divice_detalis` WHERE `id` = ? && `username` = ?', [req.body.data.deviceId, req.body.username], (err, result) => {
         if (!err) {
-         
-            if(result[0] && result[0].id == req.body.data.deviceId){
+
+            if (result[0] && result[0].id == req.body.data.deviceId) {
                 const payLoad = {
                     notification: {
                         data: { url: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg' },
@@ -254,77 +271,77 @@ app.post('/data', urlencoded, [
                 };
 
                 res.send({ status: true, error: false, mes: 'sucessful' })
-                
-            }else{
+
+            } else {
                 db.query('INSERT INTO `notification_divice_detalis`(`id`, `username`, `useragents`, `data`, `date`, `time`) VALUES (?,?,?,?,?,?)', [random, req.body.username, userAgent, enddata, date, time], (err, result) => {
                     if (!err) {
                         // data is inserted 
-        
-        
+
+
                         //here we are updating logginlog table to the id of notification_divice_detalis table to find regestred divice
                         db.query("SELECT  `testing_array`  FROM `login` WHERE `username` LIKE ? ", [req.body.username], (err, result) => {
                             if (!err) {
                                 const rand2 = random
                                     // console.log();
-                                    ls = JSON.parse(result[0].testing_array)
-                                    ls.push(rand2)
-                                    console.log(ls);
-                                    
+                                ls = JSON.parse(result[0].testing_array)
+                                ls.push(rand2)
+                                console.log(ls);
+
                                 ids = JSON.stringify(ls)
-                                    console.log(ids);
-                                    
-                                    db.query('UPDATE `login` SET `testing_array`= ? WHERE `username` LIKE ? ', [ids, req.body.username], (err, result) => {
-                                        if (!err) {
-                                            const payLoad = {
-                                                notification: {
-                                                    data: { url: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg' },
-                                                    title: `Hello ${req.body.username}, You are sucessfully registered for notifcation`,
-                                                    vibrate: [100, 50, 100],
-                                                },
-                                            };
-                                            Promise.resolve(webpush.sendNotification(req.body.data.subscription, JSON.stringify(payLoad))).then(() => {
-                                                console.log('sucessful');
-                                            }).catch(function(ex) {
-                                                return console.log(ex);
-                                            })
-                                            console.log(result);
-                                            res.send({ status: true, error: false, mes: 'sucessful' })
-                                        } else {
-                                            console.log(err);
-                                            
-                                            res.sendStatus(500)
-        
-                                        }
-                                    })
-                    
-        
+                                console.log(ids);
+
+                                db.query('UPDATE `login` SET `testing_array`= ? WHERE `username` LIKE ? ', [ids, req.body.username], (err, result) => {
+                                    if (!err) {
+                                        const payLoad = {
+                                            notification: {
+                                                data: { url: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg' },
+                                                title: `Hello ${req.body.username}, You are sucessfully registered for notifcation`,
+                                                vibrate: [100, 50, 100],
+                                            },
+                                        };
+                                        Promise.resolve(webpush.sendNotification(req.body.data.subscription, JSON.stringify(payLoad))).then(() => {
+                                            console.log('sucessful');
+                                        }).catch(function(ex) {
+                                            return console.log(ex);
+                                        })
+                                        console.log(result);
+                                        res.send({ status: true, error: false, mes: 'sucessful' })
+                                    } else {
+                                        console.log(err);
+
+                                        res.sendStatus(500)
+
+                                    }
+                                })
+
+
                             } else {
                                 console.log(err);
                             }
                         })
-        
+
                     } else {
                         console.log(err);
                     }
-        
-        
+
+
                 })
-        
+
             }
         } else {
             console.log(err);
-            
+
             res.sendStatus(500)
 
         }
     })
 
 
-        // checking part finishes
+    // checking part finishes
 
-        // here we are inserting the data into notification divice details diffrent from login log
-      
-    
+    // here we are inserting the data into notification divice details diffrent from login log
+
+
 
 
 });
@@ -348,85 +365,85 @@ app.post('/new', (req, res) => {
             for (let i = 0; i < result.length; i++) {
                 const url = "https://school.pratyushh.online/login"
                 var data = result[i]
-                if(result[i].testing_array){
-                const all_data = JSON.parse(result[i].testing_array)
-                const username_sent = result[i].username
+                if (result[i].testing_array) {
+                    const all_data = JSON.parse(result[i].testing_array)
+                    const username_sent = result[i].username
 
-                console.log(username_sent);
-                db.query('INSERT INTO `notifiction`(`username`, `photo`, `heading`, `onclick`, `date`,   `body`,   `by` ,`sttus_seen_time`) VALUES (?,?,?,?,?,?,? , ?)', [username_sent, 'none', heading, url, dateFormat(dates, "dd-mm-yyyy"), Body, usernames, random], (err, result1) => {
-                    if (!err) {
-                        const publicKey =
-                            'BL1k4svygg7piYjqcY8MH8XW7QAt5T9QU20hWn9wQgLgw6zgVpOOHYmGza1kknjWuc1S-rkkKKazzqGBXpEEWzU';
-                        const privateKey = 'ywKhgIcofvO6RRiQXufih8dhEbyibWR-epftZSFHIjg';
+                    console.log(username_sent);
+                    db.query('INSERT INTO `notifiction`(`username`, `photo`, `heading`, `onclick`, `date`,   `body`,   `by` ,`sttus_seen_time`) VALUES (?,?,?,?,?,?,? , ?)', [username_sent, 'none', heading, url, dateFormat(dates, "dd-mm-yyyy"), Body, usernames, random], (err, result1) => {
+                        if (!err) {
+                            const publicKey =
+                                'BL1k4svygg7piYjqcY8MH8XW7QAt5T9QU20hWn9wQgLgw6zgVpOOHYmGza1kknjWuc1S-rkkKKazzqGBXpEEWzU';
+                            const privateKey = 'ywKhgIcofvO6RRiQXufih8dhEbyibWR-epftZSFHIjg';
 
-                        webpush.setVapidDetails('mailto:mpratyush54@gmail.com', publicKey, privateKey);
+                            webpush.setVapidDetails('mailto:mpratyush54@gmail.com', publicKey, privateKey);
 
-                        const payLoad = {
-                            notification: {
-                                data: { url: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg' },
-                                image: "https://school.pratyushh.online/assets/images/icon/avatar-01.jpg",
-                                icon: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg',
-                                title: `${heading}`,
-                                body: `${Body}`,
-                                vibrate: [100, 50, 100],
-                            },
-                        };
+                            const payLoad = {
+                                notification: {
+                                    data: { url: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg' },
+                                    image: "https://school.pratyushh.online/assets/images/icon/avatar-01.jpg",
+                                    icon: 'https://school.pratyushh.online/assets/images/icon/avatar-01.jpg',
+                                    title: `${heading}`,
+                                    body: `${Body}`,
+                                    vibrate: [100, 50, 100],
+                                },
+                            };
 
-                        for (let y = 0; y < all_data.length; ) {
+                            for (let y = 0; y < all_data.length;) {
                                 console.log(result[i].username);
                                 console.log(all_data[y]);
-                                
-                            db.query('SELECT * FROM `notification_divice_detalis` WHERE `id` = ? && `username` = ?', [all_data[y], result[i].username], (err, result3) => {
-                                if (!err) {
-                                    // console.log(result3);
-                                    if(result3[0] && result3.length>0){
-                                        data = JSON.parse(result3[0].data)
-                                        console.log(data);
-                                        
-                                        Promise.resolve(webpush.sendNotification(data.subscription, JSON.stringify(payLoad))).then(() => {
-                                            console.log('sucessful');
-                                        }).catch(function(error) {
-                                            if(error.body =="push subscription has unsubscribed or expired." , error.statusCode == 410){
-                                                delete_notification_data(result[i].username, all_data[y])
-                                            }else{
-                                                console.log(error);
-                                            }
-                                            console.log(error.statusCode);
-                                            console.log(error.body);
-                                            
-                                        })
-                                    }else{
 
-                                        console.log('result[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].username');
-                                        console.log(result[i].username);
-                                        console.log(result);
-                                        console.log(all_data[y]);
+                                db.query('SELECT * FROM `notification_divice_detalis` WHERE `id` = ? && `username` = ?', [all_data[y], result[i].username], (err, result3) => {
+                                    if (!err) {
+                                        // console.log(result3);
+                                        if (result3[0] && result3.length > 0) {
+                                            data = JSON.parse(result3[0].data)
+                                            console.log(data);
+
+                                            Promise.resolve(webpush.sendNotification(data.subscription, JSON.stringify(payLoad))).then(() => {
+                                                console.log('sucessful');
+                                            }).catch(function(error) {
+                                                if (error.body == "push subscription has unsubscribed or expired.", error.statusCode == 410) {
+                                                    delete_notification_data(result[i].username, all_data[y])
+                                                } else {
+                                                    console.log(error);
+                                                }
+                                                console.log(error.statusCode);
+                                                console.log(error.body);
+
+                                            })
+                                        } else {
+
+                                            console.log('result[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].usernameresult[i].username');
+                                            console.log(result[i].username);
+                                            console.log(result);
+                                            console.log(all_data[y]);
+                                        }
+
+                                    } else {
+                                        console.log(err);
+
+                                        res.sendStatus(500)
+
                                     }
-                                  
-                                } else {
-                                    console.log(err);
-                                    
-                                    res.sendStatus(500)
-
-                                }
-                            })
+                                })
 
 
 
- 
-                            
-                          
-                            y++
 
+
+
+                                y++
+
+                            }
+
+
+                        } else {
+                            console.log(err);
                         }
-
-
-                    } else {
-                        console.log(err);
-                    }
-                })
+                    })
+                }
             }
-        }
 
 
             res.send({ status: true, error: false, mes: random })
@@ -437,56 +454,57 @@ app.post('/new', (req, res) => {
         }
     })
 
-    
+
 });
+
 function delete_notification_data(username, id) {
 
-console.log(username , id);
+    console.log(username, id);
 
-db.query("SELECT  `testing_array`  FROM `login` WHERE `username` LIKE ? ", [username], (err, result) => {
-    if (!err) {
-    
+    db.query("SELECT  `testing_array`  FROM `login` WHERE `username` LIKE ? ", [username], (err, result) => {
+        if (!err) {
+
             // console.log();
             ls = JSON.parse(result[0].testing_array)
 
-            index = ls.indexOf(id)  
+            index = ls.indexOf(id)
             ls.splice(index, 1);
-        
-            
-        ids = JSON.stringify(ls)
+
+
+            ids = JSON.stringify(ls)
             console.log(ids);
-            
+
             db.query('UPDATE `login` SET `testing_array`= ? WHERE `username` LIKE ? ', [ids, username], (err, result) => {
                 if (!err) {
                     db.query('DELETE FROM `notification_divice_detalis` WHERE `id` = ? && `username` = ?', [id, username], (err, result) => {
                         if (!err) {
                             // data is inserted 
-                    console.log("deleted" + id , username);
-                    
-                    
+                            console.log("deleted" + id, username);
+
+
                             //here we are updating logginlog table to the id of notification_divice_detalis table to find regestred divice
-                          
+
                         } else {
                             console.log(err);
                         }
-                    
-                    
+
+
                     })
                     console.log(result);
-            
+
                 } else {
                     console.log(err);
-                    
-                    
+
+
 
                 }
             })
 
 
-    } else {
-        console.log(err);
-    }
-})
+        } else {
+            console.log(err);
+        }
+    })
 
 
 
