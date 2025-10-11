@@ -16,10 +16,9 @@ Student_sig/
 
 # Exclude all archives and data files
 *.zip
-*.json
 app.zip
 database/
-
+Google.json
 # Exclude all image files
 *.jpg
 *.jpeg
