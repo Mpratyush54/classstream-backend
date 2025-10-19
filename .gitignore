@@ -13,7 +13,8 @@ student_adhar_front/
 Student_entrance_form/
 student_photo/
 Student_sig/
-
+assets/
+logs/
 # Exclude all archives and data files
 *.zip
 app.zip

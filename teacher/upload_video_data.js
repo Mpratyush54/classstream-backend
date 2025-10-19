@@ -3,6 +3,7 @@ const app = express.Router()
 var randomstring = require("randomstring");
 var dateFormat = require("dateformat");
 const fs = require('fs')
+const path = require('path');
 
 
 let jsonFile = require('jsonfile');
@@ -118,83 +119,92 @@ app.post('/', urlencoded, [
 
 })
 app.post('/verify-upload', (req, res) => {
-    const id = req.body.id
-    var folderintemp = false
-    var folderinasset = false
-    console.log('iii');
-    if (fs.existsSync('temp/' + id)) {
-        folderintemp = true
-console.log(folderintemp)
-    } 
-    if (fs.existsSync('aseets/' + id)) {
-        folderinasset = true
-        console.log(folderinasset)
+    const id = req.body.id.trim();
+    if (!id)
+        return res
+            .status(400)
+            .json({ status: false, error: true, mes: 'Missing video id' });
 
-    }
-    console.log('`````````````````````````````````````````````````````');
-    console.log('`````````````````````````````````````````````````````');
-    console.log(req.body.id);
-if(folderintemp == true || folderinasset == true){
-    if (folderintemp == true) {
+    const tempDir = path.join('temp', id);
+    const assetsDir = path.join('assets', id);
 
-        if (fs.existsSync('temp/' + id + '/' + id + '.mp4')) {
-            if (fs.existsSync('temp/' + id + '/' + id + '.jpg')) {
+    const tempVideo = path.join(tempDir, `${id}.mp4`);
+    const tempThumbJpg = path.join(tempDir, `${id}.jpg`);
+    const tempThumbJpeg = path.join(tempDir, `${id}.jpeg`);
+    const assetsVideo = path.join(assetsDir, `${id}1080.mp4`);
 
-                db.query('UPDATE `videos` SET `video`=?,`thumnail`=? WHERE `id` = ? ', [1, 1, id], (err, result) => {
-                    if (!err) {
-                        res.send({ status: true, error: true, mes: 'Video && Thumbnail is already uploaded' })
+    // Check existence
+    const hasTemp = fs.existsSync(tempDir);
+    const hasAssets = fs.existsSync(assetsDir);
+    const thumbExists =
+        fs.existsSync(tempThumbJpg) || fs.existsSync(tempThumbJpeg);
+    const videoExists =
+        fs.existsSync(tempVideo) || fs.existsSync(assetsVideo);
 
-                    } else {
-                        res.send({ status: true, error: false })
+    console.log(`Checking upload for id: ${id}`);
+    console.log({ hasTemp, hasAssets, videoExists, thumbExists });
 
-                    }
-                })
+    // ✅ JSON structure for response
+    const responseData = {
+        status: true,
+        error: false,
+        message: 'Upload progress status',
+        data: {
+            video: videoExists,
+            thumbnail: thumbExists,
+            processed: hasAssets,
+        },
+    };
 
-
-            } else {
-                if (fs.existsSync('temp/' + id + '/' + id + '.jpeg')) {
-                    db.query('UPDATE `videos` SET `video`=?,`thumnail`=? WHERE `id` = ? ', [1, 1, id], (err, result) => {
-                        if (!err) {
-                            res.send({ status: true, error: true, mes: 'Video && Thumbnail is already uploaded' })
-
-                        } else {
-                            res.send({ status: true, error: false })
-
-                        }
-                    })
-
-                }
-            }
-
-        }
-    } else if (folderinasset = true) {
-        console.log('aseets/' + id + '/' + id + '1080.mp4');
-
-        if (fs.existsSync('aseets/' + id + '/' + id + '1080.mp4')) {
-            if (fs.existsSync('temp/' + id + '/' + id + '.jpg')) {
-
-                db.query('UPDATE `videos` SET `process`= ? WHERE `id` = ?', [1, id], (err, result) => {
-                    if (!err) {
-                        res.send({ status: true, error: true, mes: 'Video && Thumbnail is already uploaded and proceesed' })
-
-                    } else {}
-                })
-            } else {
-                if (fs.existsSync('temp/' + id + '/' + id + '.jpeg')) {
-                    db.query('UPDATE `videos` SET `process`= ? WHERE `id` = ?', [1, id], (err, result) => {
-                        if (!err) {
-                            res.send({ status: true, error: true, mes: 'Video && Thumbnail is already uploaded and proceesed' })
-
-                        } else {}
-                    })
-                }
-
-            }
+    // === ✅ Always ensure DB matches actual file state ===
+    db.query('SELECT `video`, `thumnail`, `process` FROM `videos` WHERE `id`=?', [id], (err, result) => {
+        if (err) {
+            console.error('DB read error:', err);
+            return res
+                .status(500)
+                .json({ status: false, error: true, mes: 'Database read failed' });
         }
 
-    } else {
-        res.send({ status: true, error: false })
-    }
-}
-})
+        if (!result.length) {
+            console.warn('Video not found in DB for ID:', id);
+            return res.json(responseData);
+        }
+
+        const dbVideo = result[0].video;
+        const dbThumb = result[0].thumnail;
+        const dbProcess = result[0].process;
+
+        // Build update fields dynamically
+        const updateFields = {};
+        if (videoExists && dbVideo == 0) updateFields.video = 1;
+        if (thumbExists && dbThumb == 0) updateFields.thumnail = 1;
+        if (hasAssets && dbProcess == 0) updateFields.process = 1;
+
+        if (Object.keys(updateFields).length > 0) {
+            const setClause = Object.keys(updateFields)
+                .map((key) => `\`${key}\`=?`)
+                .join(', ');
+            const values = Object.values(updateFields);
+            values.push(id);
+
+            const query = `UPDATE \`videos\` SET ${setClause} WHERE \`id\`=?`;
+
+            db.query(query, values, (updateErr) => {
+                if (updateErr) {
+                    console.error('DB update error:', updateErr);
+                    return res
+                        .status(500)
+                        .json({ status: false, error: true, mes: 'Database update failed' });
+                }
+
+                console.log(`✅ Updated DB for ID: ${id}`, updateFields);
+                return res.json(responseData);
+            });
+        } else {
+            return res.json(responseData);
+        }
+    });
+});
+
+
 module.exports = app

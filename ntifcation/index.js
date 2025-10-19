@@ -89,7 +89,7 @@ app.post('/check-notifaction-custom2', (req, res) => {
     var usernames = String(req.body.username);
     var data = String(req.body.data);
 
-    db.query('SELECT * FROM `notifiction` WHERE   `sttus_seen_time` = ?', [data], (err, result) => {
+    db.query('SELECT * FROM `notifiction` WHERE   `sttus_seen_time` LIKE ?', [data], (err, result) => {
         if (!err) {
 
             if (!result[0] == []) {
