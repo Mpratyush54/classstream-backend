@@ -1,0 +1,37 @@
+name: 🚀 Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: 🔖 Create Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write          # ✅ Required to push tags and releases
+      issues: write            # Optional: for semantic-release comments
+      pull-requests: write     # Optional: for PR comments
+
+    steps:
+      - name: 🧩 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # important for semantic-release to access full commit history
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧠 Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # If you also publish to npm, add:
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
