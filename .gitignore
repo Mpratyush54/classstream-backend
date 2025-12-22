@@ -56,3 +56,4 @@ ffmpeg-7.0.2-arm64-static/manpages/ffmpeg-resampler.txt
 ffmpeg-7.0.2-arm64-static/manpages/ffmpeg-scaler.txt
 ffmpeg-7.0.2-arm64-static/manpages/ffmpeg-utils.txt
 ffmpeg-7.0.2-arm64-static/manpages/ffmpeg.txt
+.env
