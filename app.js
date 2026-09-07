@@ -3,9 +3,12 @@ const app = express();
 const fs = require('fs')
 var https = require('https');
 const socket = require('socket.io');
-const nms = require('./live/media_server')
+// const nms = require('./live/media_server')
+const path = require('path');
+
 const multer = require('multer');
 
+const mediaPath = path.join(__dirname, '../media');
 
 
 
@@ -42,7 +45,10 @@ app.use(function(req, res, next) {
     // }
 })
 app.use('/api/login', require('./login/index'))
-nms.run();
+    // nms.run();
+app.use('/live', express.static(path.join(mediaPath, 'live')));
+
+
 app.use(function(req, res, next) {
     console.log(req.headers.authorization);
     if (req.headers.authorization != '') {
@@ -94,6 +100,8 @@ app.use('/api/bancheck', require('./live/checklist'))
 app.use('/api/video', require('./video-licensing/video_encryption'))
 app.use('/vote', require('./vote/index'))
 require('./corn/video_processor');
+const streamRoutes = require("./live/v2/stream");
+app.use("/api/stream", streamRoutes);
 
 function addjson(data) {
     const dates = new Date();

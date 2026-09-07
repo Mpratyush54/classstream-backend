@@ -1,0 +1,299 @@
+<mxfile host="app.diagrams.net" modified="2026-06-21T00:00:00.000Z" agent="5.0" version="22.1.0" type="device">
+  <diagram id="classstream-er" name="ClassStream ER Model">
+    <mxGraphModel dx="1428" dy="842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4000" pageHeight="2500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- MySQL Database Container -->
+        <mxCell id="mysql-container" value="MySQL Database" style="swimlane;fontStyle=1;fontSize=14;fillColor=#f5f5f5;strokeColor=#666666;resizeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1800" height="1100" as="geometry"/>
+        </mxCell>
+
+        <!-- LOGIN Entity -->
+        <mxCell id="login-entity" value="login&#xa;────────────────&#xa;■ username (PK)&#xa;■ password&#xa;■ class&#xa;■ role (0=Admin,1=Student,2=Teacher)&#xa;■ status (0=Pending,1=Active,2=Blocked)&#xa;■ name&#xa;■ email (unique)&#xa;■ testing_array" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#E6E0F8;strokeColor=#6c5ce7;" vertex="1" parent="mysql-container">
+          <mxGeometry x="60" y="80" width="200" height="180" as="geometry"/>
+        </mxCell>
+
+        <!-- LOGINLOG Entity -->
+        <mxCell id="loginlog-entity" value="loginlog&#xa;────────────────&#xa;■ username (PK)&#xa;■ date&#xa;■ token (unique)&#xa;■ name&#xa;■ email&#xa;■ auth_token" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#E6E0F8;strokeColor=#6c5ce7;" vertex="1" parent="mysql-container">
+          <mxGeometry x="300" y="100" width="180" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- USER_DATA Entity -->
+        <mxCell id="user_data-entity" value="user_data&#xa;────────────────&#xa;■ sr_no (PK, AUTO)&#xa;■ unique_identification_no&#xa;■ Name_english&#xa;■ Name_hindi&#xa;■ Father_Name&#xa;■ Mother_Name&#xa;■ Date_of_birth&#xa;■ gender&#xa;■ Address&#xa;■ AdharNo (unique)&#xa;■ SelectCategory&#xa;■ class&#xa;■ Session&#xa;■ By_user (FK)&#xa;■ croppedImage&#xa;■ admission_date&#xa;■ Roll_no" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#D4EDDA;strokeColor=#28a745;" vertex="1" parent="mysql-container">
+          <mxGeometry x="60" y="320" width="200" height="250" as="geometry"/>
+        </mxCell>
+
+        <!-- VIDEOS Entity -->
+        <mxCell id="videos-entity" value="videos&#xa;────────────────&#xa;■ id (PK)&#xa;■ username (FK)&#xa;■ time&#xa;■ title&#xa;■ ChapterName&#xa;■ ChapterNumber&#xa;■ class&#xa;■ url_thumbnail&#xa;■ url_video (JSON)&#xa;■ process (0,1)&#xa;■ enc_enabled&#xa;■ enc_*_key (1080/720/480)&#xa;■ enc_*_kid (1080/720/480)&#xa;■ mpd_*_xml" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#CCE5FF;strokeColor=#007bff;" vertex="1" parent="mysql-container">
+          <mxGeometry x="520" y="80" width="200" height="260" as="geometry"/>
+        </mxCell>
+
+        <!-- NOTES Entity -->
+        <mxCell id="notes-entity" value="notes&#xa;────────────────&#xa;■ id_s (PK, AUTO)&#xa;■ id (unique)&#xa;■ title&#xa;■ class&#xa;■ chapterno&#xa;■ ChapterName&#xa;■ username (FK)&#xa;■ type (0=Text, true=PDF)&#xa;■ notes (HTML)&#xa;■ url&#xa;■ date&#xa;■ subject" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#CCE5FF;strokeColor=#007bff;" vertex="1" parent="mysql-container">
+          <mxGeometry x="520" y="380" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- NOTES_DONE Entity -->
+        <mxCell id="notes_done-entity" value="notes_done&#xa;────────────────&#xa;■ done_id (PK)&#xa;■ username (FK)&#xa;■ notes_id (FK)&#xa;■ date" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#CCE5FF;strokeColor=#007bff;" vertex="1" parent="mysql-container">
+          <mxGeometry x="760" y="400" width="180" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- CHATS Entity -->
+        <mxCell id="chats-entity" value="chats&#xa;────────────────&#xa;■ id (PK)&#xa;■ message&#xa;■ user&#xa;■ room&#xa;■ time&#xa;■ socket_id" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#FFF3CD;strokeColor=#ffc107;" vertex="1" parent="mysql-container">
+          <mxGeometry x="300" y="320" width="160" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- CHAT_BAN Entity -->
+        <mxCell id="chat_ban-entity" value="chat_ban&#xa;────────────────&#xa;■ id (PK)&#xa;■ username&#xa;■ message&#xa;■ room&#xa;■ time&#xa;■ socket_id" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#FFF3CD;strokeColor=#ffc107;" vertex="1" parent="mysql-container">
+          <mxGeometry x="300" y="480" width="160" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- MESSAGE Entity -->
+        <mxCell id="message-entity" value="message&#xa;────────────────&#xa;■ message_id (PK)&#xa;■ incoming_user&#xa;■ outgoing_user&#xa;■ message&#xa;■ seen (0,1)&#xa;■ time&#xa;■ date&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#FFF3CD;strokeColor=#ffc107;" vertex="1" parent="mysql-container">
+          <mxGeometry x="520" y="620" width="180" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- LIVE_CURRENT Entity -->
+        <mxCell id="live_current-entity" value="live_current&#xa;────────────────&#xa;■ id (PK)&#xa;■ hash_code&#xa;■ username (FK)&#xa;■ class&#xa;■ connnction_status&#xa;■ Title" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#CCE5FF;strokeColor=#007bff;" vertex="1" parent="mysql-container">
+          <mxGeometry x="760" y="80" width="180" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- NOTIFICTION Entity -->
+        <mxCell id="notifiction-entity" value="notifiction&#xa;────────────────&#xa;■ id (PK)&#xa;■ username (FK)&#xa;■ photo&#xa;■ heading&#xa;■ body&#xa;■ onclick&#xa;■ date&#xa;■ time&#xa;■ status (1=Unread,2=Read)&#xa;■ sent (1,2)&#xa;■ by (FK)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F8D7DA;strokeColor=#dc3545;" vertex="1" parent="mysql-container">
+          <mxGeometry x="990" y="80" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- NOTIFICATION_DEVICE Entity -->
+        <mxCell id="device-entity" value="notification_divice_detalis&#xa;────────────────&#xa;■ id (PK)&#xa;■ username (FK)&#xa;■ useragents&#xa;■ data (JSON)&#xa;■ date&#xa;■ time" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F8D7DA;strokeColor=#dc3545;" vertex="1" parent="mysql-container">
+          <mxGeometry x="990" y="320" width="200" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- VIDEOWATCH Entity -->
+        <mxCell id="videowatch-entity" value="videowatch&#xa;────────────────&#xa;■ submitid (PK)&#xa;■ username (FK)&#xa;■ videoid (FK)&#xa;■ watch_time" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#CCE5FF;strokeColor=#007bff;" vertex="1" parent="mysql-container">
+          <mxGeometry x="760" y="240" width="180" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- ELECTION Entity -->
+        <mxCell id="election-entity" value="election_head_boy&#xa;────────────────&#xa;■ id (PK, AUTO)&#xa;■ Name&#xa;■ Photo&#xa;■ Post" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#D1E7DD;strokeColor=#0d6efd;" vertex="1" parent="mysql-container">
+          <mxGeometry x="1230" y="80" width="180" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- VOTEFOR Entity -->
+        <mxCell id="votefor-entity" value="votefor&#xa;────────────────&#xa;■ id (PK, AUTO)&#xa;■ election_id (FK)&#xa;■ username (FK)&#xa;■ votes&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#D1E7DD;strokeColor=#0d6efd;" vertex="1" parent="mysql-container">
+          <mxGeometry x="1230" y="220" width="180" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ADMIN_DATA Entity -->
+        <mxCell id="admin_data-entity" value="admin_data&#xa;────────────────&#xa;■ id (PK)&#xa;■ session&#xa;■ current" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#E2E3E5;strokeColor=#6c757d;" vertex="1" parent="mysql-container">
+          <mxGeometry x="1230" y="380" width="160" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- PASSWORD_RESETS Entity -->
+        <mxCell id="password_resets-entity" value="password_resets&#xa;────────────────&#xa;■ email (PK)&#xa;■ token&#xa;■ created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#E2E3E5;strokeColor=#6c757d;" vertex="1" parent="mysql-container">
+          <mxGeometry x="1230" y="500" width="160" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- TIME Entity -->
+        <mxCell id="time-entity" value="time&#xa;────────────────&#xa;■ id (PK)&#xa;■ timestamp&#xa;■ active&#xa;■ genrated_json&#xa;■ Request_user&#xa;■ Request_user_for" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#FFF3CD;strokeColor=#ffc107;" vertex="1" parent="mysql-container">
+          <mxGeometry x="300" y="640" width="180" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- RELATIONSHIPS MySQL -->
+        <!-- login -> loginlog -->
+        <mxCell id="r1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c5ce7;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="loginlog-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r1-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#6c5ce7;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="280" y="100" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> user_data -->
+        <mxCell id="r2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#28a745;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="user_data-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r2-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#28a745;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="140" y="280" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> videos -->
+        <mxCell id="r3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="videos-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r3-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="380" y="80" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> notes -->
+        <mxCell id="r4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="notes-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r4-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="400" y="380" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> live_current -->
+        <mxCell id="r5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="live_current-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r5-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="620" y="80" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> notifiction -->
+        <mxCell id="r6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#dc3545;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="notifiction-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r6-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#dc3545;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="850" y="80" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> device -->
+        <mxCell id="r7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#dc3545;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="device-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r7-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#dc3545;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="850" y="300" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> videowatch -->
+        <mxCell id="r8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="videowatch-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r8-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="620" y="240" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> votefor -->
+        <mxCell id="r9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0d6efd;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="votefor-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r9-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#0d6efd;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="1100" y="220" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- notes -> notes_done -->
+        <mxCell id="r10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="notes-entity" target="notes_done-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r10-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="720" y="400" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- login -> notes_done -->
+        <mxCell id="r11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="notes_done-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- videos -> videowatch -->
+        <mxCell id="r12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="videos-entity" target="videowatch-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r12-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#007bff;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="720" y="260" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- election -> votefor -->
+        <mxCell id="r13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0d6efd;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="election-entity" target="votefor-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r13-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#0d6efd;fontStyle=bold;" vertex="1" connectable="0" parent="mysql-container">
+          <mxGeometry x="1210" y="200" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Login to itself (admin registers teacher) -->
+        <mxCell id="r14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c5ce7;strokeWidth=1;dashed=1;endArrow=classic;endFill=1;" edge="1" parent="mysql-container" source="login-entity" target="user_data-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MongoDB Database Container -->
+        <mxCell id="mongo-container" value="MongoDB Database" style="swimlane;fontStyle=1;fontSize=14;fillColor=#fff5f5;strokeColor=#666666;resizeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="40" width="1000" height="600" as="geometry"/>
+        </mxCell>
+
+        <!-- LoginAudit Entity -->
+        <mxCell id="loginaudit-entity" value="LoginAudit&#xa;────────────────&#xa;■ _id (AUTO)&#xa;■ username&#xa;■ email&#xa;■ role&#xa;■ class&#xa;■ deviceId&#xa;■ deviceName&#xa;■ platform&#xa;■ browser&#xa;■ ipAddress&#xa;■ jwt&#xa;■ action&#xa;■ status&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F0E6FF;strokeColor=#9b59b6;" vertex="1" parent="mongo-container">
+          <mxGeometry x="60" y="80" width="200" height="220" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoKeyLog Entity -->
+        <mxCell id="videokeylog-entity" value="VideoKeyLog&#xa;────────────────&#xa;■ _id (AUTO)&#xa;■ videoId&#xa;■ username&#xa;■ userType&#xa;■ keys[]:&#xa;  - quality&#xa;  - encKey&#xa;  - kid&#xa;■ ipAddress&#xa;■ expiresAt&#xa;■ action&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F0E6FF;strokeColor=#9b59b6;" vertex="1" parent="mongo-container">
+          <mxGeometry x="300" y="80" width="200" height="230" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoKeyHistory Entity -->
+        <mxCell id="videokeyhistory-entity" value="VideoKeyHistory&#xa;────────────────&#xa;■ _id (AUTO)&#xa;■ videoId&#xa;■ username&#xa;■ userType&#xa;■ keys[]:&#xa;  - quality&#xa;  - encKey&#xa;  - kid&#xa;■ ipAddress&#xa;■ action&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F0E6FF;strokeColor=#9b59b6;" vertex="1" parent="mongo-container">
+          <mxGeometry x="540" y="80" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoKeyCache Entity -->
+        <mxCell id="videokeycache-entity" value="VideoKeyCache&#xa;────────────────&#xa;■ _id (AUTO)&#xa;■ videoId&#xa;■ quality&#xa;■ kid (UNIQUE INDEX)&#xa;■ key&#xa;■ expiresAt (TTL INDEX)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F0E6FF;strokeColor=#9b59b6;" vertex="1" parent="mongo-container">
+          <mxGeometry x="60" y="340" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoAccessLog Entity -->
+        <mxCell id="videoaccesslog-entity" value="VideoAccessLog&#xa;────────────────&#xa;■ _id (AUTO)&#xa;■ videoId&#xa;■ username&#xa;■ userType&#xa;■ quality&#xa;■ kid&#xa;■ encKey&#xa;■ ipAddress&#xa;■ action&#xa;■ timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=8;fontFamily=Courier New;fontSize=9;fillColor=#F0E6FF;strokeColor=#9b59b6;" vertex="1" parent="mongo-container">
+          <mxGeometry x="300" y="340" width="200" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- MongoDB relationships -->
+        <!-- VideoKeyLog -> VideoKeyCache (lookup) -->
+        <mxCell id="mr1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9b59b6;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mongo-container" source="videokeylog-entity" target="videokeycache-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mr1-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#9b59b6;fontStyle=bold;" vertex="1" connectable="0" parent="mongo-container">
+          <mxGeometry x="260" y="340" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoKeyLog -> VideoAccessLog -->
+        <mxCell id="mr2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9b59b6;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="mongo-container" source="videokeylog-entity" target="videoaccesslog-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="mr2-label" value="1:N" style="resizable=0;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#9b59b6;fontStyle=bold;" vertex="1" connectable="0" parent="mongo-container">
+          <mxGeometry x="480" y="340" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MongoDB cross-database relationship -->
+        <mxCell id="cross-mongo-login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c5ce7;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="login-entity" target="loginaudit-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cross-mongo-login-label" value="Cross-DB Link&#xa;(username)" style="resizable=0;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#6c5ce7;fontStyle=italic;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1760" y="120" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cross-database: videos MySQL -> VideoKeyLog MongoDB -->
+        <mxCell id="cross-mongo-video" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#007bff;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="videos-entity" target="videokeylog-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cross-mongo-video-label" value="Cross-DB Link&#xa;(videoId)" style="resizable=0;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#007bff;fontStyle=italic;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1930" y="170" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cross-database: login -> VideoKeyLog (username) -->
+        <mxCell id="cross-login-keylog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9b59b6;strokeWidth=2;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="login-entity" target="videokeylog-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="cross-login-keylog-label" value="Cross-DB Link&#xa;(username)" style="resizable=0;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#9b59b6;fontStyle=italic;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1800" y="200" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Legend&#xa;───────&#xa;■ = Primary Key&#xa;FK = Foreign Key&#xa;── = 1:N Relationship&#xa;- - = Cross-DB Reference&#xa;───────&#xa;Color Coding:&#xa;Purple = Core/User tables&#xa;Blue = Video/Education&#xa;Red = Notifications&#xa;Yellow = Chat/Messages&#xa;Green = Student Data&#xa;Gray = System Config" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fontFamily=Arial;fontSize=11;fillColor=#FAFAFA;strokeColor=#333333;fontStyle=bold;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1180" width="280" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="ClassStream Backend - Entity Relationship Model" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="20" width="500" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="MySQL (17 tables) + MongoDB (5 collections)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#7F8C8D;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="55" width="300" height="25" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

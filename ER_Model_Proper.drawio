@@ -1,0 +1,294 @@
+<mxfile host="app.diagrams.net" modified="2026-06-21T00:00:00.000Z" agent="5.0" version="22.1.0">
+  <diagram id="er-diagram" name="ClassStream ER Model">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="ClassStream Backend - Entity Relationship Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="10" width="600" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== LOGIN ENTITY ==================== -->
+        <mxCell id="login" value="login&#xa;─────────────────&#xa;PK username&#xa;─────────────&#xa;password&#xa;class&#xa;role&#xa;status&#xa;name&#xa;email&#xa;testing_array" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#E8DAEF;strokeColor=#8E44AD;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="120" width="160" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== LOGINLOG ENTITY ==================== -->
+        <mxCell id="loginlog" value="loginlog&#xa;─────────────────&#xa;PK username&#xa;─────────────&#xa;date&#xa;token&#xa;name&#xa;email&#xa;auth_token" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#E8DAEF;strokeColor=#8E44AD;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="370" width="160" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== USER_DATA ENTITY ==================== -->
+        <mxCell id="user_data" value="user_data&#xa;─────────────────&#xa;PK sr_no&#xa;─────────────&#xa;unique_identification_no&#xa;Name_english&#xa;Name_hindi&#xa;Father_Name&#xa;Mother_Name&#xa;Date_of_birth&#xa;gender&#xa;Address&#xa;AdharNo&#xa;SelectCategory&#xa;class&#xa;Session&#xa;FK By_user&#xa;croppedImage&#xa;admission_date&#xa;Roll_no" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=8;fillColor=#D5F5E3;strokeColor=#27AE60;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="120" width="180" height="280" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== VIDEOS ENTITY ==================== -->
+        <mxCell id="videos" value="videos&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;FK username&#xa;time&#xa;title&#xa;ChapterName&#xa;ChapterNumber&#xa;class&#xa;url_thumbnail&#xa;url_video&#xa;process&#xa;enc_enabled&#xa;enc_1080p_key&#xa;enc_1080p_kid&#xa;enc_720p_key&#xa;enc_720p_kid&#xa;enc_480p_key&#xa;enc_480p_kid&#xa;mpd_xmls&#xa;thumbnails_xml" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=8;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="470" y="80" width="170" height="300" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== NOTES ENTITY ==================== -->
+        <mxCell id="notes" value="notes&#xa;─────────────────&#xa;PK id_s&#xa;─────────────&#xa;PK id&#xa;─────────────&#xa;title&#xa;class&#xa;chapterno&#xa;ChapterName&#xa;FK username&#xa;type&#xa;notes&#xa;url&#xa;date&#xa;subject" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=8;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="160" height="230" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== NOTES_DONE ENTITY ==================== -->
+        <mxCell id="notes_done" value="notes_done&#xa;─────────────────&#xa;PK done_id&#xa;─────────────&#xa;FK username&#xa;FK notes_id&#xa;date" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="880" y="130" width="150" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== VIDEOWATCH ENTITY ==================== -->
+        <mxCell id="videowatch" value="videowatch&#xa;─────────────────&#xa;PK submitid&#xa;─────────────&#xa;FK username&#xa;FK videoid&#xa;watch_time" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="340" width="150" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== LIVE_CURRENT ENTITY ==================== -->
+        <mxCell id="live_current" value="live_current&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;hash_code&#xa;FK username&#xa;class&#xa;connnction_status&#xa;Title" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#D6EAF8;strokeColor=#2980B9;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="470" y="420" width="160" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== NOTIFICTION ENTITY ==================== -->
+        <mxCell id="notifiction" value="notifiction&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;FK username&#xa;photo&#xa;heading&#xa;body&#xa;onclick&#xa;date&#xa;time&#xa;status&#xa;sent&#xa;FK by" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FADBD8;strokeColor=#E74C3C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="880" y="280" width="160" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== NOTIFICATION_DEVICE ENTITY ==================== -->
+        <mxCell id="device" value="notification_divice_detalis&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;FK username&#xa;useragents&#xa;data&#xa;date&#xa;time" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FADBD8;strokeColor=#E74C3C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="340" width="180" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== CHATS ENTITY ==================== -->
+        <mxCell id="chats" value="chats&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;message&#xa;user&#xa;room&#xa;time&#xa;socket_id" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FCF3CF;strokeColor=#F39C12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="560" width="150" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== CHAT_BAN ENTITY ==================== -->
+        <mxCell id="chat_ban" value="chat_ban&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;username&#xa;message&#xa;room&#xa;time&#xa;socket_id" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FCF3CF;strokeColor=#F39C12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="230" y="560" width="150" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== MESSAGE ENTITY ==================== -->
+        <mxCell id="message" value="message&#xa;─────────────────&#xa;PK message_id&#xa;─────────────&#xa;incoming_user&#xa;outgoing_user&#xa;message&#xa;seen&#xa;time&#xa;date&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FCF3CF;strokeColor=#F39C12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="230" y="720" width="150" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== ELECTION ENTITY ==================== -->
+        <mxCell id="election" value="election_head_boy&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;Name&#xa;Photo&#xa;Post" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#D1F2EB;strokeColor=#1ABC9C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="470" y="590" width="160" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== VOTEFOR ENTITY ==================== -->
+        <mxCell id="votefor" value="votefor&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;FK election_id&#xa;FK username&#xa;votes&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#D1F2EB;strokeColor=#1ABC9C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="500" width="150" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== ADMIN_DATA ENTITY ==================== -->
+        <mxCell id="admin_data" value="admin_data&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;session&#xa;current" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#E5E8E8;strokeColor=#7F8C8D;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="880" y="520" width="150" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== PASSWORD_RESETS ENTITY ==================== -->
+        <mxCell id="password_resets" value="password_resets&#xa;─────────────────&#xa;PK email&#xa;─────────────&#xa;token&#xa;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#E5E8E8;strokeColor=#7F8C8D;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="510" width="150" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== TIME ENTITY ==================== -->
+        <mxCell id="time" value="time&#xa;─────────────────&#xa;PK id&#xa;─────────────&#xa;timestamp&#xa;active&#xa;genrated_json&#xa;Request_user&#xa;Request_user_for" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#FCF3CF;strokeColor=#F39C12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="720" width="150" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== MONGODB ENTITIES ==================== -->
+
+        <!-- MongoDB Container -->
+        <mxCell id="mongo-box" value="MongoDB Collections" style="swimlane;fontStyle=1;fontSize=14;fillColor=#FEF9E7;strokeColor=#F39C12;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeWidth=1;resizeHeight=1;insertWidth=8;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="80" width="700" height="800" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="loginaudit" value="LoginAudit&#xa;─────────────────&#xa;_id (auto)&#xa;─────────────&#xa;username&#xa;email&#xa;role&#xa;class&#xa;deviceId&#xa;deviceName&#xa;platform&#xa;browser&#xa;ipAddress&#xa;jwt&#xa;query_token&#xa;action&#xa;status&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=12;" vertex="1" parent="mongo-box">
+          <mxGeometry x="20" y="50" width="160" height="240" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="videokeylog" value="VideoKeyLog&#xa;─────────────────&#xa;_id (auto)&#xa;─────────────&#xa;videoId&#xa;username&#xa;userType&#xa;keys[]&#xa;  - quality&#xa;  - encKey&#xa;  - kid&#xa;ipAddress&#xa;expiresAt&#xa;action&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=12;" vertex="1" parent="mongo-box">
+          <mxGeometry x="200" y="50" width="160" height="240" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="videokeyhistory" value="VideoKeyHistory&#xa;─────────────────&#xa;_id (auto)&#xa;─────────────&#xa;videoId&#xa;username&#xa;userType&#xa;keys[]&#xa;ipAddress&#xa;action&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=12;" vertex="1" parent="mongo-box">
+          <mxGeometry x="380" y="50" width="150" height="200" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="videokeycache" value="VideoKeyCache&#xa;─────────────────&#xa;_id (auto)&#xa;─────────────&#xa;videoId&#xa;quality&#xa;kid (index)&#xa;key&#xa;expiresAt (TTL)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=12;" vertex="1" parent="mongo-box">
+          <mxGeometry x="550" y="50" width="130" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="videoaccesslog" value="VideoAccessLog&#xa;─────────────────&#xa;_id (auto)&#xa;─────────────&#xa;videoId&#xa;username&#xa;userType&#xa;quality&#xa;kid&#xa;encKey&#xa;ipAddress&#xa;action&#xa;timestamp" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=9;fillColor=#EBF5FB;strokeColor=#3498DB;fontSize=12;" vertex="1" parent="mongo-box">
+          <mxGeometry x="20" y="340" width="160" height="190" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== RELATIONSHIPS ==================== -->
+
+        <!-- login has (1) loginlog -->
+        <mxCell id="rel1" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#8E44AD;" edge="1" parent="1" source="login" target="loginlog">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- crows foot for loginlog -->
+        <mxCell id="cf1" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#8E44AD;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="430" as="targetPoint"/>
+            <Array as="offset">
+              <mxPoint x="-10" y="0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login creates (1..N) user_data -->
+        <mxCell id="rel2" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#27AE60;" edge="1" parent="1" source="login" target="user_data">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf2" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#27AE60;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login uploads (1..N) videos -->
+        <mxCell id="rel3" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#2980B9;" edge="1" parent="1" source="login" target="videos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf3" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#2980B9;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="250" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login creates (1..N) notes -->
+        <mxCell id="rel4" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#2980B9;" edge="1" parent="1" source="login" target="notes">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf4" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#2980B9;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="220" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login sends (1..N) notifiction -->
+        <mxCell id="rel5" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#E74C3C;" edge="1" parent="1" source="login" target="notifiction">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf5" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#E74C3C;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="300" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login initiates (1..N) live_current -->
+        <mxCell id="rel6" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#2980B9;" edge="1" parent="1" source="login" target="live_current">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf6" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#2980B9;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="480" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login votes (1..N) votefor -->
+        <mxCell id="rel7" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#1ABC9C;" edge="1" parent="1" source="login" target="votefor">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf7" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#1ABC9C;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="530" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- notes tracked by (1..N) notes_done -->
+        <mxCell id="rel8" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#2980B9;" edge="1" parent="1" source="notes" target="notes_done">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf8" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#2980B9;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="180" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- videos watched by (1..N) videowatch -->
+        <mxCell id="rel9" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#2980B9;" edge="1" parent="1" source="videos" target="videowatch">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf9" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#2980B9;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- election has (1..N) votefor -->
+        <mxCell id="rel10" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#1ABC9C;" edge="1" parent="1" source="election" target="votefor">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf10" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#1ABC9C;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="580" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- login registers devices (1..N) -->
+        <mxCell id="rel11" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#E74C3C;" edge="1" parent="1" source="login" target="device">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf11" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#E74C3C;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1080" y="380" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Login tracks sessions (1..N) LoginAudit -->
+        <mxCell id="cross1" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;endArrow=classic;endFill=1;strokeColor=#3498DB;" edge="1" parent="1" source="login" target="loginaudit">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cross1-label" value="Cross-DB" style="resizable=0;html=1;align=center;verticalAlign=middle;fontSize=8;fontColor=#3498DB;fontStyle=italic;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1180" y="160" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- videos linked to VideoKeyLog -->
+        <mxCell id="cross2" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;endArrow=classic;endFill=1;strokeColor=#3498DB;" edge="1" parent="1" source="videos" target="videokeylog">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cross2-label" value="Cross-DB&#xa;(videoId)" style="resizable=0;html=1;align=center;verticalAlign=middle;fontSize=8;fontColor=#3498DB;fontStyle=italic;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1280" y="150" relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- VideoKeyLog to VideoAccessLog -->
+        <mxCell id="cross3" value="" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#3498DB;" edge="1" parent="1" source="videokeylog" target="videoaccesslog">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cf13" value="N" style="endFill=1;endSize=12;endStrokeWidth=2;endArrow=lateralOverflow;html=1;strokeColor=#3498DB;strokeWidth=2;" connectable="0" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1500" y="500" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="ER Diagram Legend&#xa;───────────────────&#xa;PK = Primary Key&#xa;FK = Foreign Key&#xa;─────────────&#xa;│──── = One&#xa;───► N = Many&#xa;────── = Cross Database&#xa;───────────────────&#xa;Color Coding:&#xa;Purple = User/Auth&#xa;Green = Student Data&#xa;Blue = Video/Education&#xa;Red = Notifications&#xa;Yellow = Chat/Messages&#xa;Teal = Elections&#xa;Gray = System Config&#xa;Blue(Mongo) = Key Management" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontFamily=Arial;fontSize=11;fillColor=#FAFAFA;strokeColor=#333333;fontStyle=bold;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="920" width="350" height="220" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
