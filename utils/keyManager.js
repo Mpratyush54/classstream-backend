@@ -113,13 +113,17 @@ async function issueOrGetKeys({ username, email, query_token, videoId, ip, userA
     }
     // console.log(video);
 
-    // 6️⃣ Return result
+    // 6️⃣ Return result (metadata drives the player header/poster — keep additive)
     return {
         cached,
         video: {
             id: videoId,
             title: video.title,
             urls: videoUrls,
+            chapterName: video.ChapterName || '',
+            chapterNumber: video.ChapterNumber ?? '',
+            class: video.class ?? '',
+            poster: video.url_thumnail && video.url_thumnail !== '0' && video.url_thumnail !== "'0'" ? video.url_thumnail : '',
         },
         keys: issuedKeys,
         expiresAt: cached ?
