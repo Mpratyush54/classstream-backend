@@ -23,6 +23,8 @@ async function getKeyService({
 }) {
     if (!videoId) throw new Error("Missing videoId");
     if (!ip) throw new Error("Missing IP for getKeyService()");
+    // Normalize possibly nested kids (e.g. [[kid]] from older callers)
+    kids = (Array.isArray(kids) ? kids : [kids]).flat(Infinity).filter(Boolean);
     if (!kids || kids.length === 0) throw new Error("Missing KID(s)");
 
     let userType = "student";

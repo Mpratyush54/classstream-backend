@@ -82,19 +82,26 @@
                 return res.status(400).json({ error: "Missing KID in request" });
             }
 
-            // Get client IP address
+            // Get client IP address (header may be missing — don't crash)
+            const forwarded = req.headers["x-forwarded-for"];
+            const forwardedIp = typeof forwarded === "string" ? forwarded.split(",")[0].trim() : "";
             const ip =
                 ipAddress ||
-                req.headers["x-forwarded-for"].split(",")[0].trim() ||
-                req.socket.remoteAddress ||
+                forwardedIp ||
+                (req.socket && req.socket.remoteAddress) ||
                 "unknown";
 
+            // Normalize kids: frontend sends { kids: [kid] }, but accept string or nested arrays
+            const flatKids = (Array.isArray(kids) ? kids : [kids]).flat(Infinity).filter(Boolean);
+            if (flatKids.length === 0) {
+                return res.status(400).json({ error: "Missing KID in request" });
+            }
             // Call service to retrieve key
             const response = await getKeyService({
                 username,
                 email,
                 query_token,
-                'kids': [kids],
+                kids: flatKids,
                 kidB64, // ✅ correct parameter
                 videoId,
                 ip, // ✅ string, not array

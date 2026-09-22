@@ -66,8 +66,11 @@ app.post('/', urlencoded, [
                     }
                     const Manually = req.body.Manually
                         // return req.body.class
+                    // Normalize: frontend sends boolean false for text notes, 'true'/true for file flow.
+                    // Old code had `else if (Manually == false)` dead branch + empty else (hang).
+                    const isFileFlow = Manually === true || Manually === 'true' || Manually === 1 || Manually === '1';
 
-                    if (Manually == false) {
+                    if (!isFileFlow) {
                         if (req.body.text) {
                             const Chapter_Name = req.body.Chapter_Name
                             const Chapter_No = req.body.Chapter_No
@@ -104,11 +107,9 @@ app.post('/', urlencoded, [
 
 
 
-                    } else if (Manually == false) {
-
-                        res.send({ status: true, error: true, mes: 'Someting went Wrong' })
-
                     } else {
+
+                        return res.status(422).json({ status: true, error: true, mes: 'Invalid note type. Send text notes here; use /teacher/notes/file for PDF uploads.' })
 
                     }
                 } else {
@@ -180,7 +181,8 @@ app.post('/file', upload.single('file'), (req, res) => {
                     const Manually = req.body.Manually
 
                     // return req.body.class
-                    if (Manually == 'true') {
+                    const isFileFlow = Manually === true || Manually === 'true' || Manually === 1 || Manually === '1';
+                    if (isFileFlow) {
 
                         const Chapter_Name = req.body.Chapter_Name
                         const Chapter_No = req.body.Chapter_No
@@ -204,11 +206,9 @@ app.post('/file', upload.single('file'), (req, res) => {
 
 
 
-                    } else if (Manually == true) {
-
-                        res.send({ status: true, error: true, mes: 'Someting went Wrong' })
-
                     } else {
+
+                        return res.status(422).json({ status: true, error: true, mes: 'Invalid note type. Set Manually=true for PDF uploads.' })
 
                     }
                 } else {

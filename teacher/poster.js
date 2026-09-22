@@ -20,11 +20,13 @@ const { check, validationResult } = require('express-validator');
 const urlencoded = bodyParser.urlencoded({ extended: false })
 
 app.get('/:id', (req, res) => {
-    folderName = req.params.id.trim()
+    const path = require('path');
+    const folderName = String(req.params.id || '').trim().replace(/[^a-zA-Z0-9_-]/g, '')
+    if (!folderName) return res.status(400).json({ status: false, message: 'Invalid id' });
 
     if (fs.existsSync('aseets/' + folderName + '/' + folderName + '' + '.jpg')) {
         const videopath = 'aseets/' + folderName + '/' + folderName + '' + '.jpg'
-        res.sendfile(videopath)
+        return res.sendFile(path.resolve(videopath))
 
 
 
@@ -34,13 +36,13 @@ app.get('/:id', (req, res) => {
     } else if (fs.existsSync('aseets/' + folderName + '/' + folderName + '' + '.jpeg')) {
 
         const videopath = 'aseets/' + folderName + '/' + folderName + '' + '.jpeg'
-        res.sendfile(videopath)
+        return res.sendFile(path.resolve(videopath))
 
 
 
     } else {
         const videopath = 'aseets/' + '404.png'
-        res.sendfile(videopath)
+        return res.sendFile(path.resolve(videopath))
 
     }
 

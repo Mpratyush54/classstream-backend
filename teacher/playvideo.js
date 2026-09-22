@@ -20,7 +20,8 @@ const { check, validationResult } = require('express-validator');
 const urlencoded = bodyParser.urlencoded({ extended: false })
 app.get('/:id', (req, res) => {
 
-    folderName = req.params.id.trim()
+    const folderName = String(req.params.id || '').trim().replace(/[^a-zA-Z0-9_-]/g, '')
+    if (!folderName) return res.status(400).json({ status: false, message: 'Invalid video id' });
     if (fs.existsSync('aseets/' + folderName + '/' + folderName + '1080' + '.mp4')) {
         if (req.headers.range) {
             const range = req.headers.range
@@ -54,9 +55,10 @@ app.get('/:id', (req, res) => {
             stream.pipe(res)
 
         } else {
-            return res.send(422)
+            return res.sendStatus(422)
         }
     }
+    return res.status(404).json({ status: false, message: 'Video file not found or not processed yet' });
     // const output720 = 'aseets/' + folderName + '/' + folderName + '720' + '.mp4'
     // const output480 = 'aseets/' + folderName + '/' + folderName + '480' + '.mp4'
     // const output280 = 'aseets/' + folderName + '/' + folderName + '280' + '.mp4'

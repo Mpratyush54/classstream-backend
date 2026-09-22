@@ -80,10 +80,12 @@ app.post('/details', (req, res) => {
                     res.send({ status: true, error: true, mes: "Invalid details" })
 
                 } else {
-                    if (result.connnction_status == true || result.connnction_status == 'true') {
-                        db.query('SELECT `name` FROM `login` WHERE `username` = ?  Limit 1', [result[0].username], (err, result2) => {
+                    const row = result[0];
+                    if (row.connnction_status == true || row.connnction_status == 'true' || row.connnction_status == 1 || row.connnction_status == '1') {
+                        db.query('SELECT `name` FROM `login` WHERE `username` = ?  Limit 1', [row.username], (err, result2) => {
                             if (!err) {
-                                res.send({ status: true, error: false, data: {name:result2[0].name, Title: result[0].Title, class: result[0].class, stream_url: 'rtmp://192.168.1.8/live', stream_key: result[0].hash_code } })
+                                const teacherName = (result2 && result2[0] && result2[0].name) || row.username;
+                                res.send({ status: true, error: false, data: {name:teacherName, Title: row.Title, class: row.class, stream_url: 'rtmp://192.168.1.8/live', stream_key: row.hash_code, hls_url: `/media/hls/${row.hash_code}.m3u8`, live: true } })
 
                             } else {
                 
@@ -96,8 +98,8 @@ app.post('/details', (req, res) => {
 
 
                     } else {
-                        console.log({ Title: result[0].Title, class: result[0].class, stream_url: 'rtmp://schooll.tk/live', stream_key: result[0].hash_code });
-                        res.send({ status: true, error: true, mes: "User Not Live yet", data: { Title: result[0].Title, class: result[0].class, stream_url: 'rtmp://schooll.tk/live', stream_key: result[0].hash_code } })
+                        console.log({ Title: row.Title, class: row.class, stream_key: row.hash_code });
+                        res.send({ status: true, error: true, mes: "User Not Live yet", live: false, data: { Title: row.Title, class: row.class, stream_url: 'rtmp://schooll.tk/live', stream_key: row.hash_code, hls_url: `/media/hls/${row.hash_code}.m3u8` } })
 
                     }
                 }

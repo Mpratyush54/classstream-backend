@@ -37,7 +37,24 @@ async function issueOrGetKeys({ username, email, query_token, videoId, ip, userA
     if (!videoRows) throw new Error("Video not found");
 
     const video = videoRows;
-    const videoUrls = JSON.parse(video.url_video);
+    // url_video schema drift: data.sql defines it as INT, processor writes JSON string.
+    // Parse defensively so un-migrated rows give a clear error instead of a crash.
+    let videoUrls;
+    try {
+        if (!video.url_video || video.url_video === 0 || video.url_video === "0") {
+            throw new Error(
+                "Video has no processed streams yet (url_video is empty). " +
+                "Run DB migration videos_url_video_text.sql and process the video via corn/video_processor."
+            );
+        }
+        videoUrls = typeof video.url_video === "string" ? JSON.parse(video.url_video) : video.url_video;
+    } catch (e) {
+        if (e.message && e.message.includes("no processed streams")) throw e;
+        throw new Error("Video url_video is corrupt (not valid JSON): " + e.message);
+    }
+    if (!videoUrls["1080p"] && !videoUrls["720p"] && !videoUrls["480p"]) {
+        throw new Error("Video has no playable renditions (1080p/720p/480p all missing)");
+    }
 
     // 4️⃣ Access Rules
     if (userType === "teacher" && video.username !== username)
