@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.4...v1.1.0) (2026-09-22)
+
+
+### Features
+
+* include chapter/class/poster metadata in issue-key response for player header ([b6c3c27](https://github.com/Mpratyush54/classstream-backend/commit/b6c3c27715d96f12d92f77a1dfd34889660351d2))
+
 ## [1.0.4](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.3...v1.0.4) (2026-09-22)
 
 
