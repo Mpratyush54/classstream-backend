@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.0...v1.0.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* video playback, notes Manually handling, live status lookup, poster/playvideo hardening + db perf indexes ([1c5988d](https://github.com/Mpratyush54/classstream-backend/commit/1c5988d5e892d2b784d98a0786e0a119a5e7f99d))
+
 # 1.0.0 (2025-10-22)
 
 
