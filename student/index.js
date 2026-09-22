@@ -25,6 +25,9 @@ const urlencoded = bodyParser.urlencoded({ extended: false })
 app.use(
     (req, res, next) => {
 
+        // Let CORS preflights through
+        if (req.method === 'OPTIONS') return next();
+
         // email (req.body is undefined on GET/HEAD — guard against TypeError crash)
         const body = req.body || {};
         var usernames = String(body.student_username || '');

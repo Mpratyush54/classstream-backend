@@ -30,6 +30,9 @@ const { JsonWebTokenError } = require('jsonwebtoken');
 app.use('/',
     (req, res, next) => {
 
+        // Let CORS preflights through (handled in app.js, but stay safe if mounted directly)
+        if (req.method === 'OPTIONS') return next();
+
         // email — req.body is undefined on GET/HEAD (no JSON body) which crashed prod with
         // "Cannot read properties of undefined (reading 'username')"
         const body = req.body || {};

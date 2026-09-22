@@ -32,28 +32,32 @@ const urlencoded = bodyParser.urlencoded({ extended: false })
 cors.bind
 
 app.use(function(req, res, next) {
-    console.log(req.headers.origin);
-    console.log(req.headers.referer);
-    // if (req.headers.origin == 'http://localhost:4200' || req.headers.referer == 'http://localhost:4200/') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin , X-Requested-With, Content-Type, Accept,x-username, x-email, x-token');
-    res.setHeader('Access-Control-Allow-Credentials', 'true'); // ✅ allow cookies/auth
+    // Reflect the request origin (credential-compatible; '*' is rejected by
+    // browsers when credentials are used). API auth is token-in-body, not cookies.
+    const origin = req.headers.origin || '*';
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-username, x-email, x-token');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Max-Age', '86400');
 
+    // Short-circuit preflights here so they never reach the auth middlewares
+    // (which would 403 on the bodiless OPTIONS and fail the preflight).
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
     next();
-    // } else {
-    //     return res.sendStatus(401)
-    // }
 })
 app.use('/api/login', require('./login/index'))
     // nms.run();
 app.use('/live', express.static(path.join(mediaPath, 'live')));
 
 
+// NOTE: previously this hung any request with an empty Authorization header
+// (neither next() nor a response). Pass through — auth is token-in-body.
 app.use(function(req, res, next) {
-    console.log(req.headers.authorization);
-    if (req.headers.authorization != '') {
-        next()
-    }
+    next()
 })
 const serves = app.listen(3010, () => {})
 const upload = multer({
