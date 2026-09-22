@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.1...v1.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* non-fatal video processor boot (local runs without ffmpeg), add missing body-parser/jsonfile deps ([082b662](https://github.com/Mpratyush54/classstream-backend/commit/082b6625e8ee3876da941eec65d72b7d975f4e3d))
+
 ## [1.0.1](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.0...v1.0.1) (2026-09-22)
 
 
