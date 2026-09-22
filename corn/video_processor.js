@@ -289,8 +289,14 @@
     }
 
     (async() => {
-        log("🕒 Encrypted DASH processor booting...");
-        await assertTools();
-        await processPendingVideos();
-        setInterval(processPendingVideos, 15 * 60 * 1000);
+        try {
+            log("🕒 Encrypted DASH processor booting...");
+            await assertTools();
+            await processPendingVideos();
+            setInterval(processPendingVideos, 15 * 60 * 1000);
+        } catch (e) {
+            // Non-fatal: API + streaming still work without the transcoding worker
+            // (local Windows runs lack `which`/ffmpeg; server runs with tools in PATH).
+            log(`⚠️ Video processor disabled: ${e.message}`);
+        }
     })();
