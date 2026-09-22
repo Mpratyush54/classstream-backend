@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.2...v1.0.3) (2026-09-22)
+
+
+### Bug Fixes
+
+* guard auth middleware against undefined req.body (GET/HEAD crashed prod with TypeError), return 403 on unknown session ([edc25a9](https://github.com/Mpratyush54/classstream-backend/commit/edc25a9dda09b122e154627aa84e3e71079c91a3))
+
 ## [1.0.2](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.1...v1.0.2) (2026-09-22)
 
 
