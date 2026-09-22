@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.3...v1.0.4) (2026-09-22)
+
+
+### Bug Fixes
+
+* CORS preflight (OPTIONS 200 + Allow-Methods + origin reflect), remove hanging auth middleware, OPTIONS bypass in auth guards ([1063af1](https://github.com/Mpratyush54/classstream-backend/commit/1063af126f07926785469e542583f4b493b0b778))
+
 ## [1.0.3](https://github.com/Mpratyush54/classstream-backend/compare/v1.0.2...v1.0.3) (2026-09-22)
 
 
