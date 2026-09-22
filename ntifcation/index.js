@@ -30,15 +30,17 @@ const { JsonWebTokenError } = require('jsonwebtoken');
 app.use('/',
     (req, res, next) => {
 
-        // email
-        var usernames = String(req.body.username);
-        var emails = String(req.body.email);
-        var query_tokens = String(req.body.query_token);
+        // email — req.body is undefined on GET/HEAD (no JSON body) which crashed prod with
+        // "Cannot read properties of undefined (reading 'username')"
+        const body = req.body || {};
+        var usernames = String(body.username || '');
+        var emails = String(body.email || '');
+        var query_tokens = String(body.query_token || '');
 
         db.query('SELECT `username`,  `token`,  `email` FROM `loginlog` WHERE `token` = ?', [query_tokens], (err, result) => {
             if (!err) {
 
-                if (!result[0] == []) {
+                if (result && result.length) {
 
 
 
@@ -55,7 +57,7 @@ app.use('/',
 
                     }
                 } else {
-                    res.send({ status: true, error: true, mes: "Something went wrong", error: err })
+                    return res.status(403).json({ status: true, error: true, mes: "user is loged out" })
                 }
             } else {
                 return res.status(403).json({ status: true, error: true, mes: "user is loged outs" })

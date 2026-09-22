@@ -25,15 +25,16 @@ const urlencoded = bodyParser.urlencoded({ extended: false })
 app.use(
     (req, res, next) => {
 
-        // email
-        var usernames = String(req.body.student_username);
-        var emails = String(req.body.student_email);
-        var query_tokens = String(req.body.student_query_token);
+        // email (req.body is undefined on GET/HEAD — guard against TypeError crash)
+        const body = req.body || {};
+        var usernames = String(body.student_username || '');
+        var emails = String(body.student_email || '');
+        var query_tokens = String(body.student_query_token || '');
 
         db.query('SELECT `username`,  `token`,  `email` FROM `loginlog` WHERE `token` = ?', [query_tokens], (err, result) => {
             if (!err) {
 
-                if (!result[0] == []) {
+                if (result && result.length) {
                     // res.send({ result })
                     rec_username = result[0].username
                     rec_emails = result[0].email
@@ -51,7 +52,7 @@ app.use(
 
 
                 } else {
-                    res.send({ status: true, error: true, mes: "Something went wrong" })
+                    return res.status(403).json({ status: true, error: true, mes: "user is loged out" })
                 }
             } else {
                 return res.status(403).json({ status: true, error: true, mes: "user is loged out" })
